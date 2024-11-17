@@ -18,19 +18,19 @@ const handleArrowKeys = (object3D: THREE.Object3D) => {
   document.addEventListener("keydown", function (e) {
     if (e.key === "ArrowUp") {
       object3D.position.y += 0.1;
-      object3D.rotateX(-15);
+      object3D.rotateX(-5);
     }
     if (e.key === "ArrowDown") {
       object3D.position.y -= 0.1;
-      object3D.rotateX(15);
+      object3D.rotateX(5);
     }
     if (e.key === "ArrowLeft") {
       object3D.position.x -= 0.1;
-      object3D.rotateX(-15);
+      object3D.rotateY(-0.1);
     }
     if (e.key === "ArrowRight") {
       object3D.position.x += 0.1;
-      object3D.rotateX(15);
+      object3D.rotateY(0.1);
     }
     const vec1 = new THREE.Vector3();
     const vec2 = new THREE.Vector3();
@@ -65,7 +65,6 @@ const ThreeScene: React.FC = () => {
       // Render the scene and camera
       cube.rotateX(0.5);
       const renderScene = () => {
-        cube.rotateY(0.01);
         renderer.render(scene, camera);
         requestAnimationFrame(renderScene);
       };
