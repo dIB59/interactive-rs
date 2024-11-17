@@ -18,15 +18,19 @@ const handleArrowKeys = (object3D: THREE.Object3D) => {
   document.addEventListener("keydown", function (e) {
     if (e.key === "ArrowUp") {
       object3D.position.y += 0.1;
+      object3D.rotateX(-15);
     }
     if (e.key === "ArrowDown") {
       object3D.position.y -= 0.1;
+      object3D.rotateX(15);
     }
     if (e.key === "ArrowLeft") {
       object3D.position.x -= 0.1;
+      object3D.rotateX(-15);
     }
     if (e.key === "ArrowRight") {
       object3D.position.x += 0.1;
+      object3D.rotateX(15);
     }
     const vec1 = new THREE.Vector3();
     const vec2 = new THREE.Vector3();
