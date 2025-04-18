@@ -32,10 +32,6 @@ const handleArrowKeys = (object3D: THREE.Object3D) => {
       object3D.position.x += 0.1;
       object3D.rotateY(0.1);
     }
-    const vec1 = new THREE.Vector3();
-    const vec2 = new THREE.Vector3();
-    console.log(object3D.getWorldPosition(vec1));
-    console.log(object3D.getWorldDirection(vec2));
   });
 };
 
