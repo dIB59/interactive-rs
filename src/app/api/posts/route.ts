@@ -3,8 +3,28 @@ import { NextResponse } from "next/server";
 
 const uri = process.env.MONGODB_URI!;
 const dbName = "blogDB";
+const env = process.env.NODE_ENV || "production";
 
 export async function GET() {
+  if (env !== "production") {
+    return new NextResponse(
+      // defailt posts for development
+      JSON.stringify([
+        {
+          id: 1,
+          title: "Sample Post 1",
+          content: "This is the content of Sample Post 1.",
+        },
+        {
+          id: 2,
+          title: "Sample Post 2",
+          content: "This is the content of Sample Post 2.",
+        },
+      ]),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
   try {
     const client = await new MongoClient(uri).connect();
     const db = client.db(dbName);
@@ -19,6 +39,20 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  if (env !== "production") {
+    // defailt posts for development
+    const { title, content } = await req.json();
+    const newPost = {
+      id: Math.floor(Math.random() * 1000),
+      title,
+      content,
+    };
+    return new NextResponse(JSON.stringify(newPost), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   try {
     const { title, content } = await req.json();
     const client = await new MongoClient(uri).connect();
