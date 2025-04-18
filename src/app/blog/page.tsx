@@ -34,7 +34,6 @@ const BlogPage: React.FC = () => {
 
   const handlePostAdded = (newlyCreatedPost: BlogPost) => {
     setPosts([...posts, newlyCreatedPost]);
-    // No direct state update based on form input within the rendering phase anymore
   };
 
   return (
@@ -42,7 +41,7 @@ const BlogPage: React.FC = () => {
       <div className="max-w-4xl mx-auto space-y-10">
         <NewPostForm onPostAdded={handlePostAdded} />
 
-        <div id="posts" className="space-y-6">
+        <div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">
             All Posts
           </h2>
