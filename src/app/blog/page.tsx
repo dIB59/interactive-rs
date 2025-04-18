@@ -12,6 +12,7 @@ interface BlogPost {
 
 const BlogPage: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
   const fetchPosts = async () => {
     try {
@@ -25,6 +26,8 @@ const BlogPage: React.FC = () => {
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false); // Update loading state after fetch
     }
   };
 
@@ -33,7 +36,7 @@ const BlogPage: React.FC = () => {
   }, []);
 
   const handlePostAdded = (newlyCreatedPost: BlogPost) => {
-    setPosts([...posts, newlyCreatedPost]);
+    setPosts((prevPosts) => [...prevPosts, newlyCreatedPost]);
   };
 
   return (
@@ -41,7 +44,7 @@ const BlogPage: React.FC = () => {
       <div className="max-w-4xl mx-auto space-y-10">
         <NewPostForm onPostAdded={handlePostAdded} />
 
-        <div>
+        <main>
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">
             All Posts
           </h2>
@@ -52,7 +55,7 @@ const BlogPage: React.FC = () => {
           ) : (
             posts.map((post) => <PostCard key={post.id} {...post} />)
           )}
-        </div>
+        </main>
       </div>
     </div>
   );
